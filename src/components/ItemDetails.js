@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+// odvoj ovaj objekat u zaseban fajl i importuj ga
 const itemDetails = {
   1: { 
     en: 'Delicious Petrus beer.', 
@@ -23,6 +23,10 @@ const itemDetails = {
 };
 
 const ItemDetails = ({ item, language }) => {
+  // nema potrebe koristiti useState za slike, niti useEffect niti asinhroni kod
+  // slike su ti staticke u istom projektu, ne stizu sa nekog API-ja
+  // samo ubaci putanju do slike uz ostatak koda image: { src: "putanja do slike"}
+  // uradi to u celom projektu, pa cemo onda gledati dalje
   const [itemImage, setItemImage] = useState(null);
   const [breweryLogo, setBreweryLogo] = useState(null);
 
