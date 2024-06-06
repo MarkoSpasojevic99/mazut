@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+/* src/index.css */
+  background-image: url('./assets/asphalt.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white; /* Set text color to white */
+  font-weight: bold; /* Set text to bold */
 }
+
+h1, h2, h3, h4, h5, h6, p, a, span, div {
+  color: white;
+  font-weight: bold;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
