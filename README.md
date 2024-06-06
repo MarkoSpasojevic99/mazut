@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Napravi pravu dokumentaciju za svoj projekat
+
+To ukljucuje kako se instalira, setupuje, builda. Zatim koje imas komponente i za sta se koriste.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
