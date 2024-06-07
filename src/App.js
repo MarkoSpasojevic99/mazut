@@ -34,16 +34,16 @@ const App = () => {
           <img src={logo} alt="Logo" className="w-32 h-auto mb-2" />
         </div>
       )}
-      {!language ? (
+     {!language ? (
         <LanguageSelection setLanguage={setLanguage} />
       ) : !category ? (
         <CategorySelection setCategory={setCategory} language={language} />
       ) : category === 'bottled_beers' && !subCategory ? (
         <SubCategorySelection setSubCategory={setSubCategory} language={language} />
       ) : !item ? (
-        <ItemSelection setItem={setItem} category={category} language={language} />
+        <ItemSelection setItem={setItem} category={subCategory || category} language={language} />
       ) : (
-        <ItemDetails item={item} language={language} />
+        <ItemDetails item={item} language={language} goBack={goBack} />
       )}
       {language && (
         <button
@@ -59,4 +59,7 @@ const App = () => {
 };
 
 export default App;
+
+
+
 
