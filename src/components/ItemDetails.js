@@ -1,5 +1,5 @@
 import React from 'react';
-import itemDetails from './data/itemDetails';
+import itemDetails from 'C:/Users/Lenovo/Desktop/mazut/my-new-app/src/data/itemDetails'; // Proveri da je putanja tačna
 
 const ItemDetails = ({ item, language }) => {
   return (
@@ -16,3 +16,5 @@ const ItemDetails = ({ item, language }) => {
 };
 
 export default ItemDetails;
+
+

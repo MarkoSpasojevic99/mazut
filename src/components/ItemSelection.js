@@ -2,11 +2,17 @@ import React from 'react';
 import items from '../data/items';
 
 const ItemSelection = ({ setItem, category, language }) => {
+  const categoryItems = items[category];
+
+  if (!categoryItems) {
+    return <div className="text-center text-white">No items found for this category.</div>;
+  }
+
   return (
     <div className="text-center">
       <h1 className="text-2xl mb-4 text-white font-bold">Select Item</h1>
       <div className="flex flex-col items-center space-y-4">
-        {items[category].map((item) => (
+        {categoryItems.map((item) => (
           <div key={item.id} onClick={() => setItem(item)} className="cursor-pointer">
             <img 
               src={`../assets/${item.imageName}`} 
@@ -22,6 +28,9 @@ const ItemSelection = ({ setItem, category, language }) => {
 };
 
 export default ItemSelection;
+
+
+
 
 
 

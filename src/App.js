@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import LanguageSelection from './components/LanguageSelection';
 import CategorySelection from './components/CategorySelection';
 import ItemSelection from './components/ItemSelection';
-import ItemDetails from './data/ItemDetails';
+import ItemDetails from './components/ItemDetails';
 import SubCategorySelection from './components/SubCategorySelection';
 import './index.css';
-import logo from './assets/logo.png';  // Import logo
+import logo from './assets/logo.png'; // Import logo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -41,9 +41,9 @@ const App = () => {
       ) : category === 'bottled_beers' && !subCategory ? (
         <SubCategorySelection setSubCategory={setSubCategory} language={language} />
       ) : !item ? (
-        <ItemSelection setItem={setItem} category={subCategory || category} language={language} />
+        <ItemSelection setItem={setItem} category={category} language={language} />
       ) : (
-        <ItemDetails item={item} language={language} goBack={goBack} />
+        <ItemDetails item={item} language={language} />
       )}
       {language && (
         <button
@@ -59,5 +59,4 @@ const App = () => {
 };
 
 export default App;
-
 
