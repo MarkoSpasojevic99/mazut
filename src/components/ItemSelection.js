@@ -15,7 +15,7 @@ const ItemSelection = ({ setItem, category, language }) => {
         {categoryItems.map((item) => (
           <div key={item.id} onClick={() => setItem(item)} className="cursor-pointer">
             <img 
-              src={`../assets/${item.imageName}`} 
+              src={require(`../assets/${item.imageName}`)} 
               alt={item.name[language]} 
               className="w-48 h-48 object-cover mb-2"
             />

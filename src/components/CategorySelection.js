@@ -9,7 +9,7 @@ const CategorySelection = ({ setCategory, language }) => {
         {categories.map((category) => (
           <div key={category.id} onClick={() => setCategory(category.id)} className="cursor-pointer">
             <img 
-              src={`../assets/${category.imageName}`} 
+             src={require(`../assets/${category.imageName}`)}  
               alt={category.name[language]} 
               className="w-48 h-48 object-cover mb-2"
             />
