@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LanguageSelection from './components/LanguageSelection';
 import CategorySelection from './components/CategorySelection';
 import ItemSelection from './components/ItemSelection';
-import ItemDetails from './components/ItemDetails';
+import ItemDetails from './data/ItemDetails';
 import SubCategorySelection from './components/SubCategorySelection';
 import './index.css';
 import logo from './assets/logo.png';  // Import logo
@@ -59,4 +59,5 @@ const App = () => {
 };
 
 export default App;
+
 
