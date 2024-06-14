@@ -17,8 +17,9 @@ const getDetails = (category, itemId) => {
 };
 
 const ItemDetails = ({ item, language }) => {
-  const [activeTab, setActiveTab] = useState(null); // No default tab selected initially
   const details = getDetails(item.category, item.id);
+  const [activeTab, setActiveTab] = useState('description'); // Default tab is description
+
   if (!details) return null;
 
   const { brewery, price, aboutBrewery, logoImageName, beerLabelImageName } = details;
@@ -37,7 +38,7 @@ const ItemDetails = ({ item, language }) => {
             onClick={() => setActiveTab('description')}
             className={`p-2 ${activeTab === 'description' ? 'bg-blue-500' : 'bg-gray-500'} text-white rounded-l`}
           >
-            Opis Piva
+            Opis
           </button>
           <button
             onClick={() => setActiveTab('brewery')}
@@ -47,9 +48,7 @@ const ItemDetails = ({ item, language }) => {
           </button>
         </div>
         <div className="p-4 bg-transparent rounded-lg">
-          {activeTab === null ? (
-            <></>
-          ) : activeTab === 'description' ? (
+          {activeTab === 'description' ? (
             <>
               <div className="text-white">{description}</div>
             </>
@@ -67,7 +66,5 @@ const ItemDetails = ({ item, language }) => {
 };
 
 export default ItemDetails;
-
-
 
 
