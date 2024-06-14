@@ -1,58 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import bottledBeersDetails from '../data/itemsDetails/bottledBeersDetails';
+import draftBeersDetails from '../data/itemsDetails/draftBeersDetails';
+import cidersDetails from '../data/itemsDetails/cidersDetails';
 
-const itemDetails = {
-  1: { 
-    en: 'Delicious Petrus beer.', 
-    sr: 'Ukusno Petrus pivo.', 
-    ru: 'Вкусное пиво Petrus.', 
-    brewery: { en: 'Petrus Brewery', sr: 'Pivara Petrus', ru: 'Пивоварня Петрус' }
-  },
-  2: { 
-    en: 'Delicious Petrus beer.', 
-    sr: 'Ukusno Petrus pivo.', 
-    ru: 'Вкусное пиво Petrus.', 
-    brewery: { en: 'Petrus Brewery', sr: 'Pivara Petrus', ru: 'Пивоварня Петрус' }
-  },
-  3: { 
-    en: 'Delicious Schneider Weisse beer.', 
-    sr: 'Ukusno Schneider Weisse pivo.', 
-    ru: 'Вкусное пиво Schneider Weisse.', 
-    brewery: { en: 'Schneider Weisse Brewery', sr: 'Pivara Schneider Weisse', ru: 'Пивоварня Шнайдер Вайсс' }
-  },
-  // Dodajte ostale piva sa opisima i informacijama o pivari
+const getDetails = (category, itemId) => {
+  switch (category) {
+    case 'bottled_beers':
+      return bottledBeersDetails[itemId];
+    case 'draft_beers':
+      return draftBeersDetails[itemId];
+    case 'ciders':
+      return cidersDetails[itemId];
+    default:
+      return null;
+  }
 };
 
 const ItemDetails = ({ item, language }) => {
-  const [itemImage, setItemImage] = useState(null);
-  const [breweryLogo, setBreweryLogo] = useState(null);
+  const details = getDetails(item.category, item.id);
+  const [activeTab, setActiveTab] = useState('description'); // Default tab is description
 
-  useEffect(() => {
-    const loadImage = async () => {
-      const image = await import(`../assets/${item.imageName}`);
-      setItemImage(image.default);
-    };
+  if (!details) return null;
 
-    const loadBreweryLogo = async () => {
-      const logo = await import(`../assets/${item.brewery || item.company}.png`);
-      setBreweryLogo(logo.default);
-    };
-
-    loadImage();
-    loadBreweryLogo();
-  }, [item.imageName, item.brewery, item.company]);
+  const { brewery, price, aboutBrewery, logoImageName, beerLabelImageName } = details;
+  const description = details[language];
+  const breweryInfo = brewery[language];
+  const aboutBreweryInfo = aboutBrewery[language];
 
   return (
     <div className="text-center relative">
       <div className="flex flex-col items-center mb-4">
-        <img src={breweryLogo} alt={item.brewery} className="w-32 h-auto mb-2" />
+        <img src={require(`../assets/${beerLabelImageName}`)} alt={item.name[language]} className="w-48 h-48 object-cover mx-auto mb-4" />
         <h1 className="text-2xl mb-2 text-white font-bold">{item.name[language]}</h1>
-        <img src={itemImage} alt={item.name[language]} className="w-48 h-48 object-cover mx-auto mb-4" />
-        <h2 className="text-xl mb-2 text-white font-bold">{itemDetails[item.id].brewery[language]}</h2>
-        <p className="text-white font-bold">{itemDetails[item.id][language]}</p>
+        <div className="text-lg text-white font-bold mb-4">{price} €</div>
+        <div className="flex justify-center mb-4">
+          <button
+            onClick={() => setActiveTab('description')}
+            className={`p-2 ${activeTab === 'description' ? 'bg-blue-500' : 'bg-gray-500'} text-white rounded-l`}
+          >
+            Opis
+          </button>
+          <button
+            onClick={() => setActiveTab('brewery')}
+            className={`p-2 ${activeTab === 'brewery' ? 'bg-blue-500' : 'bg-gray-500'} text-white rounded-r`}
+          >
+            O Pivari
+          </button>
+        </div>
+        <div className="p-4 bg-transparent rounded-lg">
+          {activeTab === 'description' ? (
+            <>
+              <div className="text-white">{description}</div>
+            </>
+          ) : (
+            <>
+              <img src={require(`../assets/${logoImageName}`)} alt={breweryInfo} className="w-32 h-auto mb-2 mx-auto" />
+              <h2 className="text-xl mb-2 text-white font-bold">{breweryInfo}</h2>
+              <div className="text-white">{aboutBreweryInfo}</div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default ItemDetails;
+
 
